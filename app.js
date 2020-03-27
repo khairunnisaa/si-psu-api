@@ -8,6 +8,7 @@ const cors = require("cors");
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var perumahanRouter = require('./routes/perumahan');
+var pertamananRouter = require('./routes/pertamanan');
 
 var app = express();
 
@@ -37,6 +38,7 @@ const db = require("./models");
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/perumahans', perumahanRouter);
+app.use('/pertamanans',pertamananRouter);
 const PORT = process.env.PORT || 7777;
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}.`);

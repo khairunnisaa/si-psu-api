@@ -15,6 +15,11 @@ module.exports = (sequelize, DataTypes) => {
     // associations can be defined here
     Pertamanan.hasMany(models.Foto, { foreignKey: 'pertamananId',as: 'fotopertamanans'});
     Pertamanan.hasMany(models.Cctv, { foreignKey: 'pertamananId',as: 'cctvpertamanans'});
+    Pertamanan.hasMany(models.Petugas, {foreignKey: 'pertamananId', as: 'petugas'})
+    Pertamanan.hasMany(models.PeralatanPemelihara, {foreignKey: 'pertamananId', as: 'peralatanpemeliharans'})
+    Pertamanan.hasMany(models.Hardscape, {foreignKey: 'pertamananId', as: 'hardscapes'})
+    Pertamanan.hasMany(models.Softscape, {foreignKey: 'pertamananId', as: 'softscapes'})
+
   };
   return Pertamanan;
 };
