@@ -5,7 +5,15 @@ const model = require('../models/index');
 // GET perumahan listing.
 router.get('/',async function(req, res, next) {
   try {
-    const perumahan = await model.Perumahan.findAll({});
+    const perumahan = await model.Perumahan.findAll({
+      include: [
+      {
+        model: model.Foto, as: 'fotos'
+      },
+      {
+        model: model.Sarana, as: 'saranas'
+      },]
+    });
     if (perumahan.length !== 0) {
       res.json({
         'status': 'OK',
