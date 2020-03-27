@@ -8,6 +8,7 @@ const cors = require("cors");
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var perumahanRouter = require('./routes/perumahan');
+var pertamananRouter = require('./routes/pertamanan');
 
 var app = express();
 
@@ -29,6 +30,14 @@ app.use(bodyParser.json());
 // parse requests of content-type - application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({ extended: true }));
 const db = require("./models");
+db
+.sequelize
+.query('SET FOREIGN_KEY_CHECKS = 0', {raw: true})
+.then(function(results) {
+  db.sequelize.sync({force: true, logging: console.log}).then(()=>{
+    console.log("Drop and re-sync db.");
+  });
+});
 // db.sequelize.sync();
 // db.sequelize.sync({ force: true }).then(() => {
 //   console.log("Drop and re-sync db.");
@@ -37,6 +46,7 @@ const db = require("./models");
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/perumahans', perumahanRouter);
+app.use('/pertamanans',pertamananRouter);
 const PORT = process.env.PORT || 7777;
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}.`);

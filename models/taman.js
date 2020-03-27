@@ -9,8 +9,8 @@ module.exports = (sequelize, DataTypes) => {
   }, {});
   Taman.associate = function(models) {
     // associations can be defined here
-    Taman.belongsTo(models.Perumahan, {foreignKey: 'perumahanId', as: 'perumahan'});
-    Taman.hasMany(models.Koordinat, {foreignKey: 'tamanId',as: 'koordinattamans'});
+    Taman.belongsTo(models.Perumahan, {foreignKey: 'perumahanId', as: 'perumahan',onDelete: 'cascade',onUpdate:'cascade'});
+    Taman.hasMany(models.Koordinat, {foreignKey: 'tamanId',as: 'koordinattamans',onDelete:'CASCADE',onUpdate:'CASCADE'});
   };
   return Taman;
 };

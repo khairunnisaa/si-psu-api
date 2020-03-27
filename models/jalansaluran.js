@@ -8,8 +8,8 @@ module.exports = (sequelize, DataTypes) => {
   }, {});
   JalanSaluran.associate = function(models) {
     // associations can be defined here
-    JalanSaluran.belongsTo(models.Perumahan, {foreignKey: 'perumahanId', as: 'perumahan'});
-    JalanSaluran.hasMany(models.Koordinat, {foreignKey: 'jalanSaluranId',as: 'koordinatjalansalurans'});
+    JalanSaluran.belongsTo(models.Perumahan, {foreignKey: 'perumahanId', as: 'perumahan',onDelete: 'cascade',onUpdate:'cascade'});
+    JalanSaluran.hasMany(models.Koordinat, {foreignKey: 'jalanSaluranId',as: 'koordinatjalansalurans',onDelete:'CASCADE',onUpdate:'CASCADE'});
   };
   return JalanSaluran;
 };

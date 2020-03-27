@@ -10,10 +10,10 @@ module.exports = (sequelize, DataTypes) => {
   }, {});
   Koordinat.associate = function(models) {
     // associations can be defined here
-    Koordinat.belongsTo(models.Sarana, {foreignKey: 'saranaId', as: 'sarana'})
-    Koordinat.belongsTo(models.JalanSaluran, {foreignKey: 'jalanSaluranId', as: 'jalansaluran'})
-    Koordinat.belongsTo(models.Perumahan,{foreignKey:'perumahanId', as:'perumahan'})
-    Koordinat.belongsTo(models.Taman,{foreignKey:'tamanId', as:'taman'})
+    Koordinat.belongsTo(models.Sarana, {foreignKey: 'saranaId', as: 'sarana',onDelete: 'cascade',onUpdate:'cascade'})
+    Koordinat.belongsTo(models.JalanSaluran, {foreignKey: 'jalanSaluranId', as: 'jalansaluran',onDelete: 'cascade',onUpdate:'cascade'})
+    Koordinat.belongsTo(models.Perumahan,{foreignKey:'perumahanId', as:'perumahan',onDelete: 'cascade',onUpdate:'cascade'})
+    Koordinat.belongsTo(models.Taman,{foreignKey:'tamanId', as:'taman',onDelete: 'cascade',onUpdate:'cascade'})
   };
   return Koordinat;
 };

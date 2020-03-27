@@ -3,16 +3,16 @@ const router = express.Router();
 const model = require('../models/index');
 
 // GET perumahan listing.
-router.get('/',async function(req, res, next) {
+router.get('/', async function (req, res, next) {
   try {
     const perumahan = await model.Perumahan.findAll({
       include: [
-      {
-        model: model.Foto, as: 'fotos'
-      },
-      {
-        model: model.Sarana, as: 'saranas'
-      },]
+        {
+          model: model.Foto, as: 'fotos'
+        },
+        {
+          model: model.Sarana, as: 'saranas'
+        },]
     });
     if (perumahan.length !== 0) {
       res.json({
@@ -36,7 +36,7 @@ router.get('/',async function(req, res, next) {
   }
 });
 // POST perumahan
-router.post('/', async function(req, res, next) {
+router.post('/', async function (req, res) {
   try {
     const {
       nama_perumahan,
@@ -79,43 +79,44 @@ router.post('/', async function(req, res, next) {
       koordinats,
       tamans,
       cctvs
-    },{
-      include: [{
-        model: model.Foto,
-        as: 'fotos'
-      },
-      {
-        model: model.Sarana,
-        as: 'saranas',
-        include: [{
+    }, {
+      include: [
+        {
+          model: model.Foto,
+          as: 'fotos'
+        },
+        {
+          model: model.Sarana,
+          as: 'saranas',
+          include: [{
+            model: model.Koordinat,
+            as: 'koordinatsaranas'
+          }]
+        },
+        {
+          model: model.JalanSaluran,
+          as: 'jalansalurans',
+          include: [{
+            model: model.Koordinat,
+            as: 'koordinatjalansalurans'
+          }]
+        },
+        {
           model: model.Koordinat,
-          as : 'koordinatsaranas'
-        }]
-      },
-      {
-        model: model.JalanSaluran,
-        as: 'jalansalurans',
-        include: [{
-          model: model.Koordinat,
-          as : 'koordinatjalansalurans'
-        }]
-      },
-      {
-        model: model.Koordinat,
-        as: 'koordinats'
-      },
-      {
-        model: model.Taman,
-        as: 'tamans',
-        include: [{
-          model: model.Koordinat,
-          as : 'koordinattamans'
-        }]
-      },
-      {
-        model: model.Cctv,
-        as: 'cctvs'
-      },
+          as: 'koordinats'
+        },
+        {
+          model: model.Taman,
+          as: 'tamans',
+          include: [{
+            model: model.Koordinat,
+            as: 'koordinattamans'
+          }]
+        },
+        {
+          model: model.Cctv,
+          as: 'cctvs'
+        },
       ]
     });
     if (perumahan) {
@@ -133,10 +134,180 @@ router.post('/', async function(req, res, next) {
     })
   }
 });
+
+//FINDONE perumahan
+router.get('/:perumahanId', async (req, res) => {
+  try {
+    const {perumahanId} = req.params;
+    const perumahan = await model.Perumahan.findOne({
+      where: {id: perumahanId},
+      include: [
+        {
+          model: model.Foto,
+          as: 'fotos'
+        },
+        {
+          model: model.Sarana,
+          as: 'saranas',
+          include: [{
+            model: model.Koordinat,
+            as: 'koordinatsaranas'
+          }]
+        },
+        {
+          model: model.JalanSaluran,
+          as: 'jalansalurans',
+          include: [{
+            model: model.Koordinat,
+            as: 'koordinatjalansalurans'
+          }]
+        },
+        {
+          model: model.Koordinat,
+          as: 'koordinats'
+        },
+        {
+          model: model.Taman,
+          as: 'tamans',
+          include: [{
+            model: model.Koordinat,
+            as: 'koordinattamans'
+          }]
+        },
+        {
+          model: model.Cctv,
+          as: 'cctvs'
+        },
+      ]
+    });
+    if (perumahan) {
+      return res.status(200).json({perumahan});
+    }
+    return res.status(404).send('Perumahan with the specified ID does not'
+        + ' exists');
+  } catch (error) {
+    return res.status(500).send(error.message);
+  }
+});
+
 // UPDATE perumahan
-router.patch('/:id', function(req, res, next) {
+router.post('/:perumahanId', async function (req, res) {
+  try {
+    const {perumahanId} = req.params;
+    const [perumahanUpdated] = await model.Perumahan.update(req.body, {
+      where: {id: perumahanId},
+      include: [
+        {
+          model: model.Foto,
+          as: 'fotos'
+        },
+        {
+          model: model.Sarana,
+          as: 'saranas',
+          include: [{
+            model: model.Koordinat,
+            as: 'koordinatsaranas'
+          }]
+        },
+        {
+          model: model.JalanSaluran,
+          as: 'jalansalurans',
+          include: [{
+            model: model.Koordinat,
+            as: 'koordinatjalansalurans'
+          }]
+        },
+        {
+          model: model.Koordinat,
+          as: 'koordinats'
+        },
+        {
+          model: model.Taman,
+          as: 'tamans',
+          include: [{
+            model: model.Koordinat,
+            as: 'koordinattamans'
+          }]
+        },
+        {
+          model: model.Cctv,
+          as: 'cctvs'
+        },
+      ]
+    });
+    if (perumahanUpdated) {
+      const updatedPerumahan = await model.Perumahan.findOne(
+          {
+            where: {id: perumahanId},
+            include: [
+              {
+                model: model.Foto,
+                as: 'fotos'
+              },
+              {
+                model: model.Sarana,
+                as: 'saranas',
+                include: [{
+                  model: model.Koordinat,
+                  as: 'koordinatsaranas'
+                }]
+              },
+              {
+                model: model.JalanSaluran,
+                as: 'jalansalurans',
+                include: [{
+                  model: model.Koordinat,
+                  as: 'koordinatjalansalurans'
+                }]
+              },
+              {
+                model: model.Koordinat,
+                as: 'koordinats'
+              },
+              {
+                model: model.Taman,
+                as: 'tamans',
+                include: [{
+                  model: model.Koordinat,
+                  as: 'koordinattamans'
+                }]
+              },
+              {
+                model: model.Cctv,
+                as: 'cctvs'
+              },
+            ]
+          });
+      return res.status(200).json({perumahanUpdate: updatedPerumahan});
+    }
+  } catch (error) {
+    res.status(500).json({
+      'status': 'ERROR memperbarui data perumahan',
+      'messages': error.message
+    })
+  }
 });
+
 // DELETE perumahan
-router.delete('/:id', function(req, res, next) {
-});
+router.delete('/:perumahanId', async (req, res) => {
+      try {
+        const {perumahanId} = req.params;
+        const deletedPerumahan = await model.Perumahan.destroy({
+          where: {id: perumahanId},
+        });
+        if (deletedPerumahan) {
+          res.status(201).json({
+            'status': 'OK',
+            'messages': 'Perumahan berhasil dihapus',
+            'data': {},
+          })
+        }
+      } catch (error) {
+        res.status(500).json({
+          'status': 'ERROR menghapus perumahan',
+          'messages': error.message
+        })
+      }
+    }
+);
 module.exports = router;

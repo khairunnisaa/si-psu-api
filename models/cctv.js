@@ -9,8 +9,8 @@ module.exports = (sequelize, DataTypes) => {
   }, {});
   Cctv.associate = function(models) {
     // associations can be defined here
-    Cctv.belongsTo(models.Perumahan, {foreignKey: 'perumahanId', as: 'perumahan'});
-    Cctv.belongsTo(models.Pertamanan, {foreignKey: 'pertamananId', as: 'pertamanan'});
+    Cctv.belongsTo(models.Perumahan, {foreignKey: 'perumahanId', as: 'perumahan',onDelete: 'cascade',onUpdate:'cascade'});
+    Cctv.belongsTo(models.Pertamanan, {foreignKey: 'pertamananId', as: 'pertamanan',onDelete: 'cascade'});
   };
   return Cctv;
 };
