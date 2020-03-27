@@ -11,7 +11,7 @@ module.exports = (sequelize, DataTypes) => {
   }, {});
   PeralatanPemelihara.associate = function(models) {
     // associations can be defined here
-    PeralatanPemelihara.belongsTo(models.Pertamanan, {foreignKey: 'pertamananId', as: 'pertamanan'});
+    PeralatanPemelihara.belongsTo(models.Pertamanan, {foreignKey: 'pertamananId', as: 'pertamanan',onDelete: 'cascade',onUpdate:'cascade'});
   };
   return PeralatanPemelihara;
 };
