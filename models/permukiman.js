@@ -17,8 +17,8 @@ module.exports = (sequelize, DataTypes) => {
     Permukiman.hasMany(models.Foto, { foreignKey: 'permukimanId',as: 'fotos',onDelete:'CASCADE'});
     Permukiman.hasMany(models.InventarisAlat, { foreignKey: 'permukimanId',as: 'inventarisalats'});
     Permukiman.hasMany(models.Status, { foreignKey: 'permukimanId',as: 'status'});
-    Permukiman.hasMany(models.Koordinat, { foreignKey: 'perumahanId',as: 'koordinats'});
-    Permukiman.hasMany(models.Cctv, { foreignKey: 'perumahanId',as: 'cctvs'});
+    Permukiman.hasMany(models.Koordinat, { foreignKey: 'permukimanId',as: 'koordinats'});
+    Permukiman.hasMany(models.Cctv, { foreignKey: 'permukimanId',as: 'cctvs'});
   };
   return Permukiman;
 };
