@@ -8,11 +8,42 @@ router.get('/', async function (req, res, next) {
     const perumahan = await model.Perumahan.findAll({
       include: [
         {
-          model: model.Foto, as: 'fotos'
+          model: model.Foto,
+          as: 'fotos'
         },
         {
-          model: model.Sarana, as: 'saranas'
-        },]
+          model: model.Sarana,
+          as: 'saranas',
+          include: [{
+            model: model.Koordinat,
+            as: 'koordinatsaranas'
+          }]
+        },
+        {
+          model: model.JalanSaluran,
+          as: 'jalansalurans',
+          include: [{
+            model: model.Koordinat,
+            as: 'koordinatjalansalurans'
+          }]
+        },
+        {
+          model: model.Koordinat,
+          as: 'koordinats'
+        },
+        {
+          model: model.Taman,
+          as: 'tamans',
+          include: [{
+            model: model.Koordinat,
+            as: 'koordinattamans'
+          }]
+        },
+        {
+          model: model.Cctv,
+          as: 'cctvs'
+        },
+      ]
     });
     if (perumahan.length !== 0) {
       res.json({
