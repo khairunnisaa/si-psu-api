@@ -1,56 +1,35 @@
 const express = require('express');
 const router = express.Router();
 const model = require('../models/index');
-
-// GET perumahan listing.
-router.get('/',async function(req, res, next) {
-  try {
-    const foto = await model.Foto.findAll({});
-    if (foto.length !== 0) {
-      res.json({
-        'status': 'OK',
-        'messages': '',
-        'data': foto
-      })
-    } else {
-      res.json({
-        'status': 'ERROR',
-        'messages': 'EMPTY',
-        'data': {}
-      })
-    }
-  } catch (err) {
-    res.json({
-      'status': 'ERROR',
-      'messages': err.messages,
-      'data': {}
-    })
+const multer = require('multer');
+var path = require('path');
+const multerStorage = multer.diskStorage({
+  destination: (req, file, callBack) => {
+    callBack(null, path.join(__dirname + './../public/images/'));
+  },
+  filename: (req,file, callBack) =>{
+    callBack(null, `FormDataPerumahan_`+ Date.now()+`_ ${file.originalname}`);
   }
+
 });
+
+var upload = multer({storage: multerStorage});
 // POST foto
-router.post('/', async function(req, res, next) {
+router.post('/mutipleFiles', upload.array('files'), async function(req, res, next) {
   try {
-    const {
-      nama_foto,
-      path_foto,
-      Perumahan,
-    } = req.body;
-    const foto = await model.Foto.create(
-        {
-      nama_foto,
-      path_foto,
-      Perumahan :[{
-        Perumahan
-      }]
-        },
-    {
-      include: [models.Perumahan]
-    });
-    if (perumahan) {
+    console.log("upload", upload);
+    const files = req.files;
+    console.log("filename:", files);
+    if (!files) {
+      const error = new Error('no file');
+      error.httpStatusCode = 400;
+      return next(error)
+    }
+    if (upload) {
       res.status(201).json({
         'status': 'OK',
-        'messages': 'Perumahan berhasil ditambahkan',
-        'data': perumahan,
+        'messages': 'Foto Perumahan berhasil ditambahkan',
+        'data': files,
       })
     }
   } catch (err) {
