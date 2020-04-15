@@ -1,6 +1,17 @@
 const express = require('express');
 const router = express.Router();
 const model = require('../models/index');
+const multer = require('multer');
+var path = require('path');
+const multerStorage = multer.diskStorage({
+  destination: (req, file, callBack) => {
+    callBack(null, path.join(__dirname + './../public/images/'));
+  },
+  filename: (req,file, callBack) =>{
+    callBack(null, `FormDataPerumahan_`+ Date.now()+`_ ${file.originalname}`);
+  }
+});
+var upload = multer({storage: multerStorage});
 
 // GET perumahan listing.
 router.get('/', async function (req, res, next) {
