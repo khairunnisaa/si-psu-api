@@ -10,7 +10,7 @@ module.exports = (sequelize, DataTypes) => {
   }, {});
   Petugas.associate = function(models) {
     // associations can be defined here
-    Petugas.Pertamanan = Petugas.belongsTo(models.Pertamanan, {foreignKey: 'pertamananId', as: 'pertamanan'})
+    Petugas.Pertamanan = Petugas.belongsTo(models.Pertamanan, {foreignKey: 'pertamananId', as: 'pertamanan',onDelete: 'CASCADE', onUpdate:'CASCADE'})
   };
   return Petugas;
 };

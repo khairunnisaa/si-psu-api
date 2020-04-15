@@ -10,7 +10,7 @@ module.exports = (sequelize, DataTypes) => {
   Sarana.associate = function(models) {
     // associations can be defined here
     Sarana.belongsTo(models.Perumahan, {foreignKey: 'perumahanId', as: 'perumahan',onDelete: 'cascade',onUpdate:'cascade'});
-    Sarana.hasMany(models.Koordinat, {foreignKey: 'saranaId',as: 'koordinatsaranas',onDelete:'CASCADE',onUpdate:'CASCADE'});
+    Sarana.hasMany(models.Koordinat, {foreignKey: 'saranaId',as: 'koordinat',onDelete:'CASCADE',onUpdate:'CASCADE'});
   };
   return Sarana;
 };

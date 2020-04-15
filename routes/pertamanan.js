@@ -8,10 +8,10 @@ router.get('/', async function (req, res, next) {
     const pertamanan = await model.Pertamanan.findAll({
       include: [
         {
-          model: model.Foto, as: 'fotopertamanans'
+          model: model.Foto, as: 'fotos'
         },
         {
-          model: model.Cctv, as: 'cctvpertamanans'
+          model: model.Cctv, as: 'cctvs'
         },
         {
           model: model.Petugas, as: 'petugas'
@@ -60,8 +60,8 @@ router.post('/', async function (req, res, next) {
       RW,
       tahun_dibangun,
       keterangan,
-      fotopertamanans,
-      cctvpertamanans,
+      fotos,
+      cctvs,
       petugas,
       peralatanpemeliharans,
       hardscapes,
@@ -77,8 +77,8 @@ router.post('/', async function (req, res, next) {
       RW,
       tahun_dibangun,
       keterangan,
-      fotopertamanans,
-      cctvpertamanans,
+      fotos,
+      cctvs,
       petugas,
       peralatanpemeliharans,
       hardscapes,
@@ -87,11 +87,11 @@ router.post('/', async function (req, res, next) {
       include: [
         {
           model: model.Foto,
-          as: 'fotopertamanans'
+          as: 'fotos'
         },
         {
           model: model.Cctv,
-          as: 'cctvpertamanans'
+          as: 'cctvs'
         },
         {
           model: model.Petugas,
@@ -127,10 +127,32 @@ router.post('/', async function (req, res, next) {
   }
 });
 
-// UPDATE perumahan
+// UPDATE PERTAMANAN
 router.patch('/:id', function (req, res, next) {
+
 });
-// DELETE perumahan
-router.delete('/:id', function (req, res, next) {
+
+// DELETE PERTAMANAN
+router.delete('/:pertamananId', async (req, res) => {
+      try {
+        const {pertamananId} = req.params;
+        const deletedPertamanan = await model.Pertamanan.destroy({
+
+          where: {id: pertamananId},
+        });
+        if (deletedPertamanan) {
+          res.status(201).json({
+            'status': 'OK',
+            'messages': 'Pertamanan berhasil dihapus',
+            'data': {},
+          })
+        }
+      } catch (error) {
+        console.log("error pertamanan", error);
+        res.status(500).json({
+          'status': 'ERROR Menghapus Data Pertamanan',
+          'messages': error.message
+        })
+      }
 });
 module.exports = router;
