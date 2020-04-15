@@ -11,7 +11,7 @@ module.exports = (sequelize, DataTypes) => {
   }, {});
   Softscape.associate = function(models) {
     // associations can be defined here
-    Softscape.belongsTo(models.Pertamanan, {foreignKey: 'pertamananId', as: 'pertamanan'});
+    Softscape.belongsTo(models.Pertamanan, {foreignKey: 'pertamananId', as: 'pertamanan',onDelete: 'CASCADE', onUpdate:'CASCADE'});
   };
   return Softscape;
 };

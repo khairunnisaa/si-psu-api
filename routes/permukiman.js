@@ -66,6 +66,7 @@ router.post('/', async function (req, res) {
       inventarisalats,
       status,
       koordinats,
+      cctvs,
     } = req.body;
     const permukiman = await model.Permukiman.create({
       nama_tpu,
@@ -82,6 +83,7 @@ router.post('/', async function (req, res) {
       inventarisalats,
       status,
       koordinats,
+      cctvs,
     }, {
       include: [
         {

@@ -12,9 +12,9 @@ module.exports = (sequelize, DataTypes) => {
   }, {});
   Foto.associate = function(models) {
     // associations can be defined here
-    Foto.Perumahan = Foto.belongsTo(models.Perumahan, {foreignKey: 'perumahanId', as: 'perumahan',onDelete: 'cascade',onUpdate:'cascade'});
-    Foto.Pertamanan = Foto.belongsTo(models.Pertamanan, {foreignKey: 'pertamananId', as: 'pertamanan'});
-    Foto.Permukiman = Foto.belongsTo(models.Permukiman, {foreignKey: 'permukimanId', as: 'permukiman',onDelete: 'cascade',onUpdate:'cascade'});
+    Foto.Perumahan = Foto.belongsTo(models.Perumahan, {foreignKey: 'perumahanId', as: 'perumahan',onDelete: 'CASCADE', onUpdate:'CASCADE'});
+    Foto.Pertamanan = Foto.belongsTo(models.Pertamanan, {foreignKey: 'pertamananId', as: 'pertamanan',onDelete: 'CASCADE', onUpdate:'CASCADE', hooks: true });
+    Foto.Permukiman = Foto.belongsTo(models.Permukiman, {foreignKey: 'permukimanId', as: 'permukiman',onDelete: 'CASCADE', onUpdate:'CASCADE'});
   };
   return Foto;
 };

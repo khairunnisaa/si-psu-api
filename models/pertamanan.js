@@ -13,12 +13,12 @@ module.exports = (sequelize, DataTypes) => {
   }, {});
   Pertamanan.associate = function(models) {
     // associations can be defined here
-    Pertamanan.hasMany(models.Foto, { foreignKey: 'pertamananId',as: 'fotopertamanans',onDelete:'CASCADE',onUpdate:'CASCADE'});
-    Pertamanan.hasMany(models.Cctv, { foreignKey: 'pertamananId',as: 'cctvpertamanans',onDelete:'CASCADE',onUpdate:'CASCADE'});
-    Pertamanan.hasMany(models.Petugas, {foreignKey: 'pertamananId', as: 'petugas',onDelete:'CASCADE',onUpdate:'CASCADE'})
-    Pertamanan.hasMany(models.PeralatanPemelihara, {foreignKey: 'pertamananId', as: 'peralatanpemeliharans',onDelete:'CASCADE',onUpdate:'CASCADE'})
-    Pertamanan.hasMany(models.Hardscape, {foreignKey: 'pertamananId', as: 'hardscapes',onDelete:'CASCADE',onUpdate:'CASCADE'})
-    Pertamanan.hasMany(models.Softscape, {foreignKey: 'pertamananId', as: 'softscapes',onDelete:'CASCADE',onUpdate:'CASCADE'})
+    Pertamanan.hasMany(models.Foto, { foreignKey: 'pertamananId',as: 'fotos', onDelete: 'cascade', hooks: true });
+    Pertamanan.hasMany(models.Cctv, { foreignKey: 'pertamananId',as: 'cctvs'});
+    Pertamanan.hasMany(models.Petugas, {foreignKey: 'pertamananId', as: 'petugas'});
+    Pertamanan.hasMany(models.PeralatanPemelihara, {foreignKey: 'pertamananId', as: 'peralatanpemeliharans'});
+    Pertamanan.hasMany(models.Hardscape, {foreignKey: 'pertamananId', as: 'hardscapes'});
+    Pertamanan.hasMany(models.Softscape, {foreignKey: 'pertamananId', as: 'softscapes'})
 
   };
   return Pertamanan;

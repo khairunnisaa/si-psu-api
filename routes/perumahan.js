@@ -27,7 +27,7 @@ router.get('/', async function (req, res, next) {
           as: 'saranas',
           include: [{
             model: model.Koordinat,
-            as: 'koordinatsaranas'
+            as: 'koordinat'
           }]
         },
         {
@@ -132,7 +132,7 @@ router.post('/', async function (req, res) {
           as: 'saranas',
           include: [{
             model: model.Koordinat,
-            as: 'koordinatsaranas'
+            as: 'koordinat'
           }]
         },
         {
@@ -193,7 +193,7 @@ router.get('/:perumahanId', async (req, res) => {
           as: 'saranas',
           include: [{
             model: model.Koordinat,
-            as: 'koordinatsaranas'
+            as: 'koordinat'
           }]
         },
         {
@@ -269,7 +269,7 @@ router.post('/:perumahanId', async function (req, res) {
           as: 'saranas',
           include: [{
             model: model.Koordinat,
-            as: 'koordinatsaranas'
+            as: 'koordinat'
           }]
         },
         {

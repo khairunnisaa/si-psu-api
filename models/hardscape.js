@@ -11,7 +11,7 @@ module.exports = (sequelize, DataTypes) => {
   }, {});
   Hardscape.associate = function(models) {
     // associations can be defined here
-    Hardscape.belongsTo(models.Pertamanan, {foreignKey: 'pertamananId', as: 'pertamanan'});
+    Hardscape.belongsTo(models.Pertamanan, {foreignKey: 'pertamananId', as: 'pertamanan', onDelete: 'CASCADE', onUpdate:'CASCADE'});
   };
   return Hardscape;
 };
