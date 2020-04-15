@@ -77,6 +77,67 @@ router.get('/', async function (req, res, next) {
     })
   }
 });
+
+
+// POST perumahan
+router.post('/bulk', async function (req, res) {
+  try {
+    const perumahan = await model.Perumahan.bulkCreate(req.body, {
+      include: [
+        {
+          model: model.Foto,
+          as: 'fotos'
+        },
+        {
+          model: model.Sarana,
+          as: 'saranas',
+          include: [{
+            model: model.Koordinat,
+            as: 'koordinatsaranas'
+          }]
+        },
+        {
+          model: model.JalanSaluran,
+          as: 'jalansalurans',
+          include: [{
+            model: model.Koordinat,
+            as: 'koordinatjalansalurans'
+          }]
+        },
+        {
+          model: model.Koordinat,
+          as: 'koordinats'
+        },
+        {
+          model: model.Taman,
+          as: 'tamans',
+          include: [{
+            model: model.Koordinat,
+            as: 'koordinattamans'
+          }]
+        },
+        {
+          model: model.Cctv,
+          as: 'cctvs'
+        },
+      ]
+    });
+    if (perumahan) {
+      res.status(201).json({
+        'status': 'OK',
+        'messages': 'Perumahan berhasil ditambahkan',
+        'data': perumahan,
+      })
+    }
+  } catch (err) {
+    res.status(400).json({
+      'status': 'ERROR',
+      'messages': err.message,
+      'data': {},
+    })
+  }
+});
+
 // POST perumahan
 router.post('/', async function (req, res) {
   try {
@@ -94,7 +155,7 @@ router.post('/', async function (req, res) {
       sph,
       jumlah_psu,
       keterangan,
-      // fotos,
+      fotos,
       saranas,
       jalansalurans,
       koordinats,
@@ -115,7 +176,7 @@ router.post('/', async function (req, res) {
       sph,
       jumlah_psu,
       keterangan,
-      // fotos,
+      fotos,
       saranas,
       jalansalurans,
       koordinats,
