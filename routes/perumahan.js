@@ -74,7 +74,7 @@ router.get('/', async function (req, res, next) {
     } else {
       res.json({
         'status': 'ERROR',
-        'messages': 'EMPTY',
+        'messages': 'data perumahan kosong',
         'data': {}
       })
     }
