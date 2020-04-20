@@ -27,13 +27,12 @@ var corsOptions = {
 app.use(cors({origin: "*"}));
 // app.use(logger('dev'));
 app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 // parse requests of content-type - application/json
 app.use(bodyParser.json());
 // parse requests of content-type - application/x-www-form-urlencoded
-app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.urlencoded({ extended: false }));
 const db = require("./models");
 db.sequelize.sync();
 db.sequelize.sync({ force: true }).then(() => {
