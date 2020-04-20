@@ -2,10 +2,10 @@
   "development": {
     "username": "postgres",
     "password": "123456789",
+    "port" : 5433,
     "database": "si-psu-db",
     "host": "127.0.0.1",
     "dialect": "postgres",
-    "port": 5433,
     "operatorsAliases": false
   },
   "test": {
@@ -17,10 +17,11 @@
     "operatorsAliases": false
   },
   "production": {
-    "username": "postgres",
-    "password": "postgres",
-    "database": "si-psu-db-prod",
-    "host": "127.0.0.1",
+    "username": "gfwzdygdoahxal",
+    "password": "85b8ebed7ed43b37873940bc4723eac8ae6bdec49d15cf2fc4f50ac62470ad57",
+    "port" : 5432,
+    "database": "ded80vveodvbv5",
+    "host": "ec2-3-223-21-106.compute-1.amazonaws.com",
     "dialect": "postgres",
     "operatorsAliases": false
   }
