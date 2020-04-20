@@ -10,6 +10,7 @@ var perumahanRouter = require('./routes/perumahan');
 var pertamananRouter = require('./routes/pertamanan');
 var permukimanRouter = require('./routes/permukiman');
 var fotoRouter = require('./routes/foto');
+const model = require('./models/index');
 var Stream = require('node-rtsp-stream');
 // var stream = new Stream({
 //   name: 'name',
@@ -36,14 +37,33 @@ app.use(bodyParser.urlencoded({ extended: false }));
 const db = require("./models");
 db.sequelize.sync();
 db.sequelize.sync({ force: true }).then(() => {
+  initial();
   console.log("Drop and re-sync db.");
 });
+function initial() {
+  model.roles.create({
+    id: 1,
+    name: "user"
+  });
+
+  model.roles.create({
+    id: 2,
+    name: "moderator"
+  });
+
+  model.roles.create({
+    id: 3,
+    name: "admin"
+  });
+}
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/perumahans', perumahanRouter);
 app.use('/pertamanans',pertamananRouter);
 app.use('/permukimans',permukimanRouter);
 app.use('/fotos',fotoRouter);
+require('./routes/auth')(app);
+require('./routes/user')(app);
 // const Stream = require('node-rtsp-stream-jsmpeg');
 //
 // const options = {

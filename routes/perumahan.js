@@ -2,10 +2,12 @@ const express = require('express');
 const router = express.Router();
 const model = require('../models/index');
 const multer = require('multer');
+const fs = require('fs');
 var path = require('path');
+var DIR = path.join(__dirname, '../images/');
 const multerStorage = multer.diskStorage({
   destination: (req, file, callBack) => {
-    callBack(null, path.join(__dirname + './../public/images/'));
+    callBack(null, path.join(DIR));
   },
   filename: (req,file, callBack) =>{
     callBack(null, `FormDataPerumahan_`+ Date.now()+`_ ${file.originalname}`);
