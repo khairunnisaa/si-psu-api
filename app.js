@@ -13,7 +13,7 @@ var fotoRouter = require('./routes/foto');
 var Stream = require('node-rtsp-stream');
 // var stream = new Stream({
 //   name: 'name',
-//   streamUrl: 'rtsp://admin:aditya123@192.168.0.13:554/onvif1',
+//   streamUrl: 'rtsp://admin:aditya123@192.168.0.22:554/onvif1',
 //   wsPort: 9999,
 //   ffmpegOptions: { // options ffmpeg flags
 //     '-stats': '', // an option with no neccessary value uses a blank string
@@ -46,7 +46,7 @@ app.use('/pertamanans',pertamananRouter);
 app.use('/permukimans',permukimanRouter);
 app.use('/fotos',fotoRouter);
 // const Stream = require('node-rtsp-stream-jsmpeg');
-//
+
 // const options = {
 //   name: 'cctv',
 //   url: 'rtsp://admin:aditya123@192.168.0.13:554/onvif1',

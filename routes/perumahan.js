@@ -1,11 +1,12 @@
 const express = require('express');
 const router = express.Router();
 const model = require('../models/index');
-
+const Stream = require('node-rtsp-stream');
 // GET perumahan listing.
 router.get('/', async function (req, res, next) {
   try {
     const perumahan = await model.Perumahan.findAll({
+      plain : true,
       include: [
         {
           model: model.Foto,
@@ -46,9 +47,10 @@ router.get('/', async function (req, res, next) {
       ]
     });
     if (perumahan.length !== 0) {
+      console.log("data rumah", perumahan);
       res.json({
         'status': 'OK',
-        'messages': '',
+        'messages': 'Data Perumahan berhasil ditampilkan',
         'data': perumahan
       })
     } else {
