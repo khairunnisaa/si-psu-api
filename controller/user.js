@@ -2,14 +2,22 @@ exports.allAccess = (req, res) => {
   res.status(200).send("Public Content.");
 };
 
-exports.userBoard = (req, res) => {
-  res.status(200).send("User Content.");
-};
-
 exports.adminBoard = (req, res) => {
   res.status(200).send("Admin Content.");
 };
 
-exports.moderatorBoard = (req, res) => {
-  res.status(200).send("Moderator Content.");
+
+exports.operatorRumahBoard = (req, res) => {
+  res.status(200).send("Operator Perumahan Content.");
 };
+
+
+exports.operatorTamanBoard = (req, res) => {
+  res.status(200).send("Operator Pertamanan Content.");
+};
+
+
+exports.operatorPemukimanBoard = (req, res) => {
+  res.status(200).send("Operator Pemukiman Content.");
+};
+

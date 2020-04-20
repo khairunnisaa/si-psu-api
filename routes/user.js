@@ -13,15 +13,21 @@ module.exports = function(app) {
   app.get("/api/test/all", controller.allAccess);
 
   app.get(
-      "/api/test/user",
-      [authJwt.verifyToken],
-      controller.userBoard
+      "/api/test/operator_pemukiman",
+      [authJwt.verifyToken, authJwt.isOperatorPermukiman],
+      controller.operatorPemukimanBoard
   );
 
   app.get(
-      "/api/test/mod",
-      [authJwt.verifyToken, authJwt.isModerator],
-      controller.moderatorBoard
+      "/api/test/operator_pertamanan",
+      [authJwt.verifyToken, authJwt.isOperatorTaman],
+      controller.operatorTamanBoard
+  );
+
+  app.get(
+      "/api/test/operator_perumahan",
+      [authJwt.verifyToken, authJwt.isOperatorRumah],
+      controller.operatorRumahBoard
   );
 
   app.get(

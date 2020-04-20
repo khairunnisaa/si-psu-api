@@ -2,35 +2,20 @@ const db = require("../models/index");
 const ROLES = db.ROLES;
 const User = db.users;
 
-const checkDuplicateUsernameOrEmail = (req, res, next) => {
+const checkDuplicateNik = (req, res, next) => {
   // Username
   User.findOne({
     where: {
-      username: req.body.username
+      nik: req.body.nik
     }
   }).then(user => {
     if (user) {
       res.status(400).send({
-        message: "Failed! Username is already in use!"
+        message: "GAGAL, NIK sudah digunakan!"
       });
       return;
     }
-
-    // Email
-    User.findOne({
-      where: {
-        email: req.body.email
-      }
-    }).then(user => {
-      if (user) {
-        res.status(400).send({
-          message: "Failed! Email is already in use!"
-        });
-        return;
-      }
-
       next();
-    });
   });
 };
 
@@ -50,7 +35,7 @@ const checkRolesExisted = (req, res, next) => {
 };
 
 const verifySignUp = {
-  checkDuplicateUsernameOrEmail: checkDuplicateUsernameOrEmail,
+  checkDuplicateNik: checkDuplicateNik,
   checkRolesExisted: checkRolesExisted
 };
 

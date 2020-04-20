@@ -43,17 +43,22 @@ db.sequelize.sync({ force: true }).then(() => {
 function initial() {
   model.roles.create({
     id: 1,
-    name: "user"
+    name: "operator_pertamanan"
   });
 
   model.roles.create({
     id: 2,
-    name: "moderator"
+    name: "operator_perumahan"
   });
 
   model.roles.create({
     id: 3,
     name: "admin"
+  });
+
+  model.roles.create({
+    id: 4,
+    name: "operator_pemukiman"
   });
 }
 app.use('/', indexRouter);
