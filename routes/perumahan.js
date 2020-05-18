@@ -150,21 +150,21 @@ router.post('/bulk', async function (req, res) {
 });
 
 // POST perumahan
-router.post('/', upload.any(), async function (req, res) {
+router.post('/', async function (req, res) {
   try {
-    var fotoz = [{
-      nama_foto: '',
-      path_foto: '',
-    }];
-    console.log("upload", upload);
-    const files = req.files;
-    const bodye = JSON.stringify(req.body.data);
-    console.log("filename:", files);
-    files.map( path => {
-      fotoz.push({
-        path_foto: '/images/' + path.filename,
-    })
-    });
+    // var fotoz = [{
+    //   nama_foto: '',
+    //   path_foto: '',
+    // }];
+    // console.log("upload", upload);
+    // const files = req.files;
+    // const bodye = JSON.stringify(req.body.data);
+    // console.log("filename:", files);
+    // files.map( path => {
+    //   fotoz.push({
+    //     path_foto: '/images/' + path.filename,
+    // })
+    // });
 
       const {
       nama_perumahan,
@@ -180,7 +180,7 @@ router.post('/', upload.any(), async function (req, res) {
       sph,
       jumlah_psu,
       keterangan,
-      fotos = fotoz,
+      // fotos = fotoz,
       saranas,
       jalansalurans,
       koordinats,
@@ -201,7 +201,7 @@ router.post('/', upload.any(), async function (req, res) {
       sph,
       jumlah_psu,
       keterangan,
-      fotos,
+      // fotos,
       saranas,
       jalansalurans,
       koordinats,
